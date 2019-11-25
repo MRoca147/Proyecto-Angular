@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<br>
+
+<div>
+<div style="text-align: center;">
+<h6>
+Bienvenido a PremierDB donde podrás estar actualizado de todo lo sucedido 
+en tu liga favorita la Premier League
+</h6>
+</div>
+<br>
+<div class="card-columns count">
+    <div class="card center" *ngFor='let team of teams'>
+      <div style="margin: 10px;">
+        <img width="50" src="{{team.strTeamBadge}}" alt="Team Badge">
+        <div>
+        <h6>{{ team.strTeam }}</h6>
+        </div>
+        <button routerLink="/Home/{{team.idTeam}}" 
+        routerLinkActive="active" class="btn btn-primary">Ver información</button>
+      </div>
+    </div>
+</div>
+</div>
+    

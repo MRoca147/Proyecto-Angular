@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="container-fluid">
+  <div class="row" style="padding: 10px;">
+    <div class="col-sm-2">
+      <a routerLink="/Home/{{player.idTeam}}" routerLinkActive="active">
+        <img class="back" src="https://image.flaticon.com/icons/svg/271/271218.svg" alt="">
+        <h6 style="text-align: left; padding: 5px 0;">Volver</h6>
+      </a>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-4" style="text-align: center;">
+      <img class="profile" src="{{player.strThumb}}" alt="">
+      <h3>{{player.strPlayer}}</h3>
+      <h5>Team: {{player.strTeam}}</h5>
+      <h5>Position: {{player.strPosition}}</h5>
+      <h5>Shirt Number: {{player.strNumber}}</h5>
+      <h5>Height: {{player.strHeight}}</h5>
+      <ng-container *ngIf="(player.strWeight == ''); else elseblock">
+        <h5>Weight: unknown</h5>
+      </ng-container>
+      <ng-template #elseblock>
+        <h5>Weight: {{player.strWeight}}</h5>
+      </ng-template>
+    </div>
+    <div class="col-sm-8">
+      <h5>Site</h5>
+      <div class="row" style="padding: 0 0 0 15px;">
+        <a routerLink="/Home" routerLinkActive="active">
+          <h6 style="padding: 5px 0px;">Home/</h6>
+        </a>
+        <a routerLink="/Home/{{player.idTeam}}" routerLinkActive="active">
+          <h6 style="padding: 5px 0px;">{{player.strTeam}}/</h6>
+        </a>
+        <a routerLink="/Home/{{player.idTeam}}/{{player.strPlayer}}" routerLinkActive="active">
+          <h6 style="padding: 5px 0px;">{{player.strPlayer}}</h6>
+        </a>
+      </div>
+      <h3>Nationality: {{player.strNationality}}</h3>
+      <h3>Date Born: {{player.dateBorn}}</h3>
+      <h3>Date signed: {{player.dateSigned}}</h3>
+      <h3>Description</h3>
+      <p>{{player.strDescriptionEN}}</p>
+    </div>
+  </div>
+</div>

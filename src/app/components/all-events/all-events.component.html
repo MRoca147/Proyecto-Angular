@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="container-fluid">
+  <div class="row" style="padding: 10px;">
+    <div class="col-sm-2">
+      <a routerLink="/Home/{{team.idTeam}}" routerLinkActive="active">
+      <img width="30px" style="float: left;" src="https://image.flaticon.com/icons/svg/271/271218.svg" alt="">
+      <h6 style="text-align: left; padding: 5px 0;">Volver</h6>
+      </a>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3" style="text-align: center;">
+      <div>
+        <h3 style="max-width: 100%;">{{team.strTeam}}</h3>
+        <img class="resize" src="{{team.strTeamBadge}}">
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+      <h5>Site</h5>
+      <div class="row" style="padding: 0 0 0 15px;">
+        <a routerLink="/Home" routerLinkActive="active">
+          <h6 style="padding: 5px 0px;">Home/</h6>
+        </a>
+        <a routerLink="/Home/{{team.idTeam}}" routerLinkActive="active">
+          <h6 style="padding: 5px 0px;">{{team.strTeam}}/</h6>
+        </a>
+        <a routerLink="/Home/{{team.idTeam}}/all/Events" routerLinkActive="active">
+          <h6 style="padding: 5px 0px;">All Events</h6>
+        </a>
+      </div>
+      <h3>All Team Events</h3>
+      <table class="table table-dark">
+        <tr *ngFor="let event of events;">
+          <ng-container *ngIf="(event.idHomeTeam == team.idTeam || event.idAwayTeam == team.idTeam)">
+          <td class="table-column">{{event.strDate}}</td>
+          <td class="table-column">{{event.strHomeTeam}}</td>
+          <td class="table-column">{{event.intHomeScore}}</td>
+          <td class="table-column">-</td>
+          <td class="table-column">{{event.intAwayScore}}</td>
+          <td class="table-column">{{event.strAwayTeam}}</td>
+          <ng-container *ngIf="event.intHomeScore != null">
+            <td>
+              <button routerLink='/Home/{{team.idTeam}}/{{event.idEvent}}/EventDetails' routerLinkActive="active"
+              class="btn btn-light">See info</button>
+            </td>
+          </ng-container>
+        </ng-container>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,179 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+ <div class="container-fluid">
+  <div>
+    {{name}}
+      <a routerLink="/Home" routerLinkActive="active">
+      <img width="30px" style="float: left;" src="https://image.flaticon.com/icons/svg/271/271218.svg" alt="">
+      <h6 style="text-align: left; padding: 5px 0;">Volver</h6>
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-sm-3" style="text-align: center;">
+      <div>
+        <h3 style="max-width: 100%;">{{team.strTeam}}</h3>
+        <img class="resize" src="{{team.strTeamBadge}}">
+        <h5>Alternative name:</h5>
+        <h5>{{team.strAlternate}}</h5>
+        <div class="line"></div>
+      </div>
+      
+      <div>
+        <h5>Jersey</h5>
+        <img class="resize" src="{{team.strTeamJersey}}">
+          <h5>Social Media</h5>
+        <ul>
+          <li>
+            <a href="{{team.strWebsite}}" target="_blank">
+              <img style="width: 50px;" src="https://image.flaticon.com/icons/svg/1383/1383676.svg" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="{{team.strFacebook}}" target="_blank">
+              <img style="width: 50px;" src="https://seeklogo.com/images/F/facebook-icon-logo-03865A9BA2-seeklogo.com.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="{{team.strTwitter}}" target="_blank">
+              <img style="width: 50px;" src="https://seeklogo.com/images/T/twitter-icon-circle-blue-logo-94339974C6-seeklogo.com.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="{{team.strInstagram}}" target="_blank">
+              <img style="width: 50px;" src="https://seeklogo.com/images/I/instagram-new-2016-logo-D9D42A0AD4-seeklogo.com.png" alt="">
+            </a>
+          </li>
+        </ul>
+
+        <div class="line"></div>
+
+        <h5>See all Events</h5>
+        <a routerLink='/Home/{{team.idTeam}}/All/Events' routerLinkActive="active" >
+        <img width="100px" src="https://seeklogo.com/images/G/google-calendar-logo-8594DB460D-seeklogo.com.png" alt="">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+      <div>
+        <h4>Logo</h4>
+        <img style="width: 200px; padding-bottom: 40px;" src="{{team.strTeamLogo}}">
+      </div>
+
+      <div>
+        <h4>Description</h4>
+        <p class="Pdescription">{{team.strDescriptionEN}}</p>
+      </div>
+      <div class="line"></div>
+      <div class="row">
+        <div class="col-sm-4">
+        <h4>Stadium</h4>
+        <img class="resize" src="{{team.strStadiumThumb}}">
+        </div>
+        <div class="col-sm-8">
+          <p class="Pdescription" style="margin-top: 35px;">{{team.strStadiumDescription}}</p>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div>
+        <h4>Manager</h4>
+          <div class="card center" style="width: 300px;">
+            <ng-container *ngFor='let player of players; let i = index'>
+            <ng-container *ngIf="player.strPosition == 'Manager'">
+            <a class="a" routerLink='/Home/{{team.idTeam}}/{{player.idPlayer}}' routerLinkActive="active">
+              <img class="card-img-top" style="width: 30%;" src="{{player.strThumb}}" alt="">
+              <div class="card-body">
+                <h4 class="card-title center">{{ player.strPlayer }}</h4>
+              </div>
+            </a>
+            </ng-container>
+          </ng-container>
+          </div>
+      </div>
+      <div class="line"></div>
+      <div>
+        <h4>Team Members</h4>
+        <div class="card-columns count">
+          <div class="card center" *ngFor='let player of players; let i = index'>
+            <ng-container *ngIf="player.strPosition != 'Manager'">
+            <a class="a" routerLink='/Home/{{team.idTeam}}/{{player.idPlayer}}' routerLinkActive="active">
+              <img class="card-img-top" style="width: 50%;" src="{{player.strThumb}}" alt="">
+              <div class="card-body">
+                <h4 class="card-title center">{{ player.strPlayer }}</h4>
+              </div>
+            </a>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="line"></div>
+
+      <div>
+        <h4>Next 5 Matchs</h4>
+        <table class="table table-dark">
+          <tr *ngFor="let nEvent of nEvents" style="bottom: 10px;">
+            <td class="table-column" style="width: 140px;">{{nEvent.dateEvent}}</td>
+            <td class="table-column"> | </td>
+            <td class="center">{{nEvent.strHomeTeam}}</td>
+            <td class="table-column"> vs </td>
+            <td class="center">{{nEvent.strAwayTeam}}</td>
+          </tr>
+        </table>
+        </div>
+
+      <div>
+        <h4>Last 5 Matchs</h4>
+        <table class="table table-dark">
+          <tr *ngFor="let lEvent of lEvents">
+            <td class="table-column">{{lEvent.dateEvent}}</td>
+            <td class="table-column"> | </td>
+            <td class="center">{{lEvent.strHomeTeam}}</td>
+            <td class="table-column">{{lEvent.intHomeScore}}</td>
+            <td class="table-column">-</td>
+            <td class="table-column">{{lEvent.intAwayScore}}</td>
+            <td class="center">{{lEvent.strAwayTeam}}</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div>
+        <h3>Position Table</h3>
+        <table class="table table-dark">
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>PM</th>
+            <th>W</th>
+            <th>L</th>
+            <th>D</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th>Points</th>
+          </tr>
+          <tr *ngFor="let position of table; let i = index;">
+            <td>{{i+1}}</td>
+            <td *ngIf="position.name == team.strTeam; else elseblock"><p style="font-weight: bold; color: red;">{{position.name}}</p></td>
+            <ng-template #elseblock><td>{{position.name}}</td></ng-template>
+            <td>{{position.played}}</td>
+            <td>{{position.win}}</td>
+            <td>{{position.loss}}</td>
+            <td>{{position.draw}}</td>
+            <td>{{position.goalsfor}}</td>
+            <td>{{position.goalsagainst}}</td>
+            <td>{{position.goalsdifference}}</td>
+            <td>{{position.total}}</td>
+          </tr>
+        </table>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
