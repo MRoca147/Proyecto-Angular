@@ -1,3 +1,15 @@
+.background{
+    background-color: rgb(13, 13, 14);
+}
+
+h1,h2,h4,p{
+    color: white;
+}
+
+h3,h5{
+    color: #04F5FF;
+}
+
 .profile {
     width: 80%; 
     height: 300px;

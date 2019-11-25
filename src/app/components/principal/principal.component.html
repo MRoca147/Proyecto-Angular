@@ -1,26 +1,71 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<br>
 
+<div class="container-fluid background">
+<br>
 <div>
 <div style="text-align: center;">
+<div>
 <h6>
 Bienvenido a PremierDB donde podrás estar actualizado de todo lo sucedido 
 en tu liga favorita la Premier League
 </h6>
 </div>
 <br>
-<div class="card-columns count">
+</div>
+<div class="row">
+<div class="col-sm-3">
+<div class="center">
+  <h4>Favorites Teams</h4>
+  <h6>Add Teams!</h6>
+  <div class="line"></div>
+  <br>
+  <div class="card-row">
+    <div class="card" style="margin: 0 0 10px; padding: 10px;" *ngFor="let favorite of favorites">
+      <div class="row">
+      <div class="col-md-3">
+        <img width="70" src="{{favorite.strTeamBadge}}" alt="Team Badge">
+      </div>
+      <div class="col-md-9">
+      <h6>{{favorite.strTeam}}</h6>
+      <div style="margin-bottom: 10px;">
+        <a href="/Home" (click)="deleteFavorite(favorite)">Eliminar de favoritos</a>
+      </div>
+      <div>
+      <button routerLink="/Home/{{favorite.idTeam}}" 
+        routerLinkActive="active" class="btn btn-primary">Ver Perfil</button>
+      </div>
+      </div>
+      </div>
+    </div>
+    <div class="line" style="margin: 0 0 10px;"></div>
+  </div>
+</div>
+</div>
+
+<div class="col-sm-9">
+<div class="center"><h4>All Premier League Teams</h4></div>
+  <div class="card-columns count">
     <div class="card center" *ngFor='let team of teams'>
       <div style="margin: 10px;">
         <img width="50" src="{{team.strTeamBadge}}" alt="Team Badge">
         <div>
         <h6>{{ team.strTeam }}</h6>
         </div>
+        <div style="margin-bottom: 10px;">
+        <a href="/Home" (click)="setFavorite(team)">Agregar a favoritos</a>
+        </div>
+        <div>
         <button routerLink="/Home/{{team.idTeam}}" 
-        routerLinkActive="active" class="btn btn-primary">Ver información</button>
+        routerLinkActive="active" class="btn btn-primary">Ver Perfil</button>
+        </div>
       </div>
     </div>
+  </div>
 </div>
 </div>
+</div>
+
+
+
     

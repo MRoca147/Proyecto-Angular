@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AllTeamsService } from 'src/app/services/all-teams.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-principal',
@@ -8,10 +7,11 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent implements OnInit {
-  cookieValue: any[] = [];
   teams: any[] = [];
+  favorites: any[] = [];
+  favArray: any[] =[];
 
-  constructor(protected AllTeamsService: AllTeamsService, private Cookie: CookieService) { }
+  constructor(protected AllTeamsService: AllTeamsService) { }
 
   ngOnInit() {
     this.AllTeamsService.getTeams()
@@ -24,17 +24,62 @@ export class PrincipalComponent implements OnInit {
       }
     );
 
+    this.getFavorite();
 
+  }
+
+  getFavorite(){
+    console.log(JSON.parse(localStorage.getItem('favorites')));
+    this.favorites = JSON.parse(localStorage.getItem('favorites'));
   }
 
   setFavorite(team){
-    this.cookieValue.push(team);
-    this.setCookie(this.cookieValue);
+    if(localStorage.getItem('favorites')){
+      if(this.searchFavorite(team) == true){
+        alert('El equipo ya está en favorito');
+        console.log('yes');
+      }else{
+        var nFav = JSON.parse(localStorage.getItem('favorites'));
+        nFav.push(team);
+        localStorage.setItem('favorites', JSON.stringify(nFav));
+      }
+    }else{
+        console.log(team);
+        console.log(this.favorites)
+        this.favArray.push(team);
+        console.log(JSON.stringify(this.favArray));
+        localStorage.setItem('favorites', JSON.stringify(this.favArray));
+    }
   }
 
-  setCookie(cookie){
-    this.Cookie.set('favorite', cookie);
-    console.log(this.Cookie.get('favorite'))
+  deleteFavorite(team){
+    var favs = JSON.parse(localStorage.getItem('favorites'));
+    console.log(favs);
+    var i=0;
+    favs.forEach(element => {
+      if(element.idTeam == team.idTeam){
+        var idx = favs.indexOf(element);
+        favs.splice(idx, 1);
+      }
+      i++
+    });
+    localStorage.setItem('favorites', JSON.stringify(favs));
+  }
+
+  searchFavorite(team){
+    if(localStorage.getItem('favorites')){
+      var array = JSON.parse(localStorage.getItem('favorites'))
+      var repeat = false;
+      array.forEach(element => {
+        if(element.idTeam == team.idTeam){
+          repeat = true;
+          return repeat;
+        }
+      });
+      return repeat;
+    }else{
+      return false;
+    }
   }
 
 }
