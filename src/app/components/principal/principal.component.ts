@@ -29,7 +29,6 @@ export class PrincipalComponent implements OnInit {
   }
 
   getFavorite(){
-    console.log(JSON.parse(localStorage.getItem('favorites')));
     this.favorites = JSON.parse(localStorage.getItem('favorites'));
   }
 
@@ -37,24 +36,19 @@ export class PrincipalComponent implements OnInit {
     if(localStorage.getItem('favorites')){
       if(this.searchFavorite(team) == true){
         alert('El equipo ya está en favorito');
-        console.log('yes');
       }else{
         var nFav = JSON.parse(localStorage.getItem('favorites'));
         nFav.push(team);
         localStorage.setItem('favorites', JSON.stringify(nFav));
       }
     }else{
-        console.log(team);
-        console.log(this.favorites)
         this.favArray.push(team);
-        console.log(JSON.stringify(this.favArray));
         localStorage.setItem('favorites', JSON.stringify(this.favArray));
     }
   }
 
   deleteFavorite(team){
     var favs = JSON.parse(localStorage.getItem('favorites'));
-    console.log(favs);
     var i=0;
     favs.forEach(element => {
       if(element.idTeam == team.idTeam){

@@ -155,7 +155,7 @@
           </tr>
           <tr *ngFor="let position of table; let i = index;">
             <td>{{i+1}}</td>
-            <td *ngIf="position.name == team.strTeam; else elseblock"><p style="font-weight: bold; color: red;">{{position.name}}</p></td>
+            <td style="background-color:  #E90052;" *ngIf="position.name == team.strTeam; else elseblock"><p style="font-weight: bold; color: white;">{{position.name}}</p></td>
             <ng-template #elseblock><td>{{position.name}}</td></ng-template>
             <td>{{position.played}}</td>
             <td>{{position.win}}</td>

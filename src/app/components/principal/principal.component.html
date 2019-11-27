@@ -29,7 +29,7 @@ en tu liga favorita la Premier League
       <div class="col-md-9">
       <h6>{{favorite.strTeam}}</h6>
       <div style="margin-bottom: 10px;">
-        <a href="/Home" (click)="deleteFavorite(favorite)">Eliminar de favoritos</a>
+        <a href="javascript:location.reload()" (click)="deleteFavorite(favorite)">Eliminar de favoritos</a>
       </div>
       <div>
       <button routerLink="/Home/{{favorite.idTeam}}" 
@@ -53,7 +53,7 @@ en tu liga favorita la Premier League
         <h6>{{ team.strTeam }}</h6>
         </div>
         <div style="margin-bottom: 10px;">
-        <a href="/Home" (click)="setFavorite(team)">Agregar a favoritos</a>
+        <a href="javascript:location.reload()" (click)="setFavorite(team)">Agregar a favoritos</a>
         </div>
         <div>
         <button routerLink="/Home/{{team.idTeam}}" 
